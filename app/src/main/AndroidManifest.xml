@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BrowseStream"
-            android:label="@string/title_activity_browse_stream"
+            android:name=".menu"
+            android:label="@string/title_activity_menu"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -30,8 +30,8 @@
                 android:value="com.example.michael.twitchapiintegration.MainActivity" />
         </activity>
         <activity
-            android:name=".menu"
-            android:label="@string/title_activity_menu"
+            android:name=".BrowseChannels"
+            android:label="@string/title_activity_browse_channels"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
