@@ -189,11 +189,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectStream(View v){
-        Intent intent = new Intent(this, BrowseStream.class);
+        Intent intent = new Intent(this, BrowseChannels.class);
         TextView editText = (TextView) findViewById(R.id.title);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-
     }
 }
