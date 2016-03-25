@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -28,6 +29,7 @@ public class BrowseStream extends AppCompatActivity {
     private String vUrl;
     private String vHeight;
     private String streamTitle;
+    private TextView chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class BrowseStream extends AppCompatActivity {
 
         WebView video = (WebView) findViewById(R.id.webView);
         TextView title = (TextView) findViewById(R.id.Streamtitle);
+        chat = (TextView)findViewById(R.id.chatReadout);
+        chat.setMovementMethod(new ScrollingMovementMethod());
+
 
         title.setText(streamTitle);
         try{
@@ -60,6 +65,14 @@ public class BrowseStream extends AppCompatActivity {
 
         }
         //video.setMinimumHeight();
+
+        //opening chat
+        String streamer = intent.getExtras().getString("streamer");
+        try {
+            new IRCConnection("irc.chat.twitch.tv",6667,streamer.toLowerCase(),chat).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public class RetrieveStreams extends AsyncTask<String, String, String> {
@@ -86,7 +99,7 @@ public class BrowseStream extends AppCompatActivity {
                 e.printStackTrace();
             }
             finally {
-                urlConnection.disconnect();
+                //urlConnection.disconnect();
             }
             return result.toString();
         }
@@ -94,7 +107,7 @@ public class BrowseStream extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+            //findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
             super.onPostExecute(s);
             try {
                 JSONObject json = new JSONObject(s);
@@ -111,7 +124,7 @@ public class BrowseStream extends AppCompatActivity {
             } catch (JSONException e) {
                 Log.e("JSONException", "Error: " + e.toString());
             } // catch (JSONException e)
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         }
     }
 

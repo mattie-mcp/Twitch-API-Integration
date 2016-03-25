@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BrowseStream.class);
         TextView editText = (TextView) findViewById(R.id.title);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra("streamer", message);
         startActivity(intent);
 
     }
